@@ -1,47 +1,122 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Contact List App</title>
 
-<!-- Optional theme -->
+<!-- Mobile viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-  <title>Contact List App</title>
+<!-- Custom CSS -->
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f2f6f9;
+    color: #333;
+    padding: 20px 0;
+  }
+
+  h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .contact-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+  .contact-card input {
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    margin-top: 5px;
+  }
+
+  /* Button Colors */
+  .btn-primary { background-color: #007bff; border-color: #007bff; }
+  .btn-primary:hover { background-color: #0056b3; border-color: #0056b3; }
+
+  .btn-info { background-color: #17a2b8; border-color: #17a2b8; }
+  .btn-info:hover { background-color: #117a8b; border-color: #117a8b; }
+
+  .btn-warning { background-color: #ffc107; border-color: #ffc107; }
+  .btn-warning:hover { background-color: #e0a800; border-color: #e0a800; }
+
+  .btn-danger { background-color: #dc3545; border-color: #dc3545; }
+  .btn-danger:hover { background-color: #b02a37; border-color: #b02a37; }
+
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .contact-card {
+      padding: 15px;
+    }
+  }
+
+</style>
 </head>
 <body>
-  <div class="container" ng-controller="AppCtrl">
-    <h1>Contact List App</h1>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>         
-          <th>Email</th>
-          <th>Number</th>
-          <th>Action</th>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input class="form-control" ng-model="contact.name"></td>
-          <td><input class="form-control" ng-model="contact.email"></td>
-          <td><input class="form-control" ng-model="contact.number"></td>
-          <td><button class="btn btn-primary" ng-click="addContact()">Add Contact</button></td>
-          <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button></td>
-        </tr>
-        <tr ng-repeat="contact in contactlist">
-          <td>{{contact.name}}</td>
-          <td>{{contact.email}}</td>
-          <td>{{contact.number}}</td>
-          <td><button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button></td>
-          <td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="container" ng-controller="AppCtrl">
 
+  <h1>Contact List App</h1>
+
+  <!-- Input Card -->
+  <div class="contact-card">
+    <input class="form-control" ng-model="contact.name" placeholder="Name">
+    <input class="form-control" ng-model="contact.email" placeholder="Email">
+    <input class="form-control" ng-model="contact.number" placeholder="Number">
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <button class="btn btn-primary btn-block" ng-click="addContact()">Add Contact</button>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <button class="btn btn-info btn-block" ng-click="update()">Update</button>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <button class="btn btn-info btn-block" ng-click="deselect()">Clear</button>
+      </div>
+    </div>
   </div>
+
+  <!-- Contact Cards -->
+  <div class="contact-card" ng-repeat="contact in contactlist">
+     
+    <div class="row">
+      <div class="col-xs-6 col-sm-4">
+        <button class="btn btn-warning btn-block" ng-click="edit(contact._id)">Edit</button>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <button class="btn btn-danger btn-block" ng-click="remove(contact._id)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
 <script src="controllers/controller.js"></script>
 </body>
